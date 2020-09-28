@@ -6,12 +6,13 @@ import {
   FormControlLabel,
 } from "@material-ui/core/";
 
-function FormularioCadastro({ onSubmit }) {
+function FormularioCadastro({ onSubmit, validarCPF }) {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [cpf, setCpf] = useState("");
   const [promocoes, setPromocoes] = useState(true);
   const [novidades, setNovidades] = useState(true);
+  const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
 
   return (
     <form
@@ -48,6 +49,13 @@ function FormularioCadastro({ onSubmit }) {
         onChange={(event) => {
           setCpf(event.target.value);
         }}
+        onBlur={(event) => {
+          const isValid = validarCPF(cpf);
+
+          setErros({ cpf: isValid });
+        }}
+        error={!erros.cpf.valido}
+        helperText={erros.cpf.texto}
         id="CPF"
         label="CPF"
         variant="outlined"
