@@ -13,10 +13,14 @@ class App extends Component {
         <Typography variant="h4" component="h1" align="center">
           Formulário de Cadastro
         </Typography>
-        <FormularioCadastro />
+        <FormularioCadastro onSubmit={onSubmit} />
       </Container>
     );
   }
+}
+
+function onSubmit(dados) {
+  console.log(dados);
 }
 
 export default App;
