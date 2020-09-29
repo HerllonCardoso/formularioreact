@@ -6,7 +6,7 @@ import {
   FormControlLabel,
 } from "@material-ui/core/";
 
-function FormularioCadastro({ onSubmit, validarCPF }) {
+function DadosPessoais({ onSubmit, validarCPF }) {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -96,4 +96,4 @@ function FormularioCadastro({ onSubmit, validarCPF }) {
   );
 }
 
-export default FormularioCadastro;
+export default DadosPessoais;

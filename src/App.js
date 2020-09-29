@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import FormularioCadastro from "./components/FormularioCadastro";
-
-import { Container, Typography } from "@material-ui/core";
+import FormularioCadastro from "./components/FormularioCadastro/FormularioCadastro";
 import "fontsource-roboto";
 
+import { Container, Typography } from "@material-ui/core"
+
 class App extends Component {
-  state = {};
   render() {
     return (
       <Container component="article" maxWidth="sm">
