@@ -5,25 +5,19 @@ import DadosPessoais from "./DadosPessoais";
 import DadosUsuarios from "./DadosUsuario";
 
 function FormularioCadastro({ onSubmit, validarCPF }) {
-  const [etapaAtual, setEtapaAtual] = useState(1);
+  const [etapaAtual, setEtapaAtual] = useState(0);
 
-  function formularioAtual(etapa) {
-    switch (etapa) {
-      case 0:
-        return <DadosUsuarios />;
-      case 1:
-        return <DadosPessoais onSubmit={onSubmit} validarCPF={validarCPF} />;
-      case 2:
-        return <DadosEntrega />;
-      default:
-        return <Typography>Error</Typography>;
-    }
+  const formularios = [
+    <DadosUsuarios onSubmit={nextStep} />,
+    <DadosPessoais onSubmit={nextStep} validarCPF={validarCPF} />,
+    <DadosEntrega onSubmit={onSubmit} />,
+  ];
+
+  function nextStep() {
+    setEtapaAtual(etapaAtual + 1);
   }
 
-  return <>{formularioAtual(etapaAtual)}</>;
+  return <>{formularios[etapaAtual]}</>;
 }
 
-// <DadosPessoais onSubmit={onSubmit} validarCPF={validarCPF} />
-// <DadosUsuarios />
-// <DadosEntrega />
 export default FormularioCadastro;
