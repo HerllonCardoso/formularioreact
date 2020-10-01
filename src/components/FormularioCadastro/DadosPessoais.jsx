@@ -6,7 +6,7 @@ import {
   FormControlLabel,
 } from "@material-ui/core/";
 
-function DadosPessoais({ onSubmit, validarCPF }) {
+function DadosPessoais({ onSubmit, validacoes }) {
   const [nome, setNome] = useState("");
   const [sobrenome, setSobrenome] = useState("");
   const [cpf, setCpf] = useState("");
@@ -14,11 +14,29 @@ function DadosPessoais({ onSubmit, validarCPF }) {
   const [novidades, setNovidades] = useState(true);
   const [erros, setErros] = useState({ cpf: { valido: true, texto: "" } });
 
+  function validarCampos(event) {
+    const { name, value } = event.target;
+    const novoEstado = { ...erros };
+    novoEstado[name] = validacoes[name](value);
+    setErros(novoEstado);
+  }
+
+  function possoEnviar() {
+    for (let campo in erros) {
+      if (!erros[campo].valido) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   return (
     <form
       onSubmit={(event) => {
         event.preventDefault();
-        onSubmit({ nome, sobrenome, cpf, novidades, promocoes });
+        if (possoEnviar()) {
+          onSubmit({ nome, sobrenome, cpf, novidades, promocoes });
+        }
       }}
     >
       <TextField
@@ -27,6 +45,7 @@ function DadosPessoais({ onSubmit, validarCPF }) {
           setNome(event.target.value);
         }}
         id="nome"
+        name="nome"
         label="Nome"
         variant="outlined"
         margin="normal"
@@ -38,6 +57,7 @@ function DadosPessoais({ onSubmit, validarCPF }) {
           setSobrenome(event.target.value);
         }}
         id="sobrenome"
+        name="sobrenome"
         label="Sobrenome"
         variant="outlined"
         margin="normal"
@@ -49,14 +69,11 @@ function DadosPessoais({ onSubmit, validarCPF }) {
         onChange={(event) => {
           setCpf(event.target.value);
         }}
-        onBlur={(event) => {
-          const isValid = validarCPF(cpf);
-
-          setErros({ cpf: isValid });
-        }}
+        onBlur={validarCampos}
         error={!erros.cpf.valido}
         helperText={erros.cpf.texto}
         id="CPF"
+        name="cpf"
         label="CPF"
         variant="outlined"
         margin="normal"
@@ -90,7 +107,7 @@ function DadosPessoais({ onSubmit, validarCPF }) {
       />
 
       <Button type="submit" variant="contained" color="primary">
-        Cadastrar{" "}
+        Próximo
       </Button>
     </form>
   );

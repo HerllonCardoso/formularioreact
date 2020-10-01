@@ -4,7 +4,7 @@ import DadosEntrega from "./DadosEntrega";
 import DadosPessoais from "./DadosPessoais";
 import DadosUsuarios from "./DadosUsuario";
 
-function FormularioCadastro({ onSubmit, validarCPF }) {
+function FormularioCadastro({ onSubmit, validacoes }) {
   const [etapaAtual, setEtapaAtual] = useState(0);
   const [dadosColetados, setDados] = useState({});
 
@@ -13,9 +13,9 @@ function FormularioCadastro({ onSubmit, validarCPF }) {
   });
 
   const formularios = [
-    <DadosUsuarios onSubmit={coletarDados} />,
-    <DadosPessoais onSubmit={coletarDados} validarCPF={validarCPF} />,
-    <DadosEntrega onSubmit={coletarDados} />,
+    <DadosUsuarios onSubmit={coletarDados} validacoes={validacoes} />,
+    <DadosPessoais onSubmit={coletarDados} validacoes={validacoes} />,
+    <DadosEntrega onSubmit={coletarDados} validacoes={validacoes} />,
     <Typography variant="h5">Obrigado pelo Cadastro!</Typography>,
   ];
 
