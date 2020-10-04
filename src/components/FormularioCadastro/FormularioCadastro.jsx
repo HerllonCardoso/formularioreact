@@ -4,6 +4,8 @@ import DadosEntrega from "./DadosEntrega";
 import DadosPessoais from "./DadosPessoais";
 import DadosUsuarios from "./DadosUsuario";
 
+import { ReactComponent as Success } from "../../assets/success.svg";
+
 function FormularioCadastro({ onSubmit }) {
   const [etapaAtual, setEtapaAtual] = useState(0);
   const [dadosColetados, setDados] = useState({});
@@ -16,12 +18,13 @@ function FormularioCadastro({ onSubmit }) {
     <DadosUsuarios onSubmit={coletarDados} />,
     <DadosPessoais onSubmit={coletarDados} />,
     <DadosEntrega onSubmit={coletarDados} />,
-    <Typography variant="h5">Obrigado pelo Cadastro!</Typography>,
+    <Typography variant="h5">
+      <Success />
+    </Typography>,
   ];
 
   function coletarDados(dados) {
     setDados({ ...dadosColetados, ...dados });
-    console.log(dadosColetados);
     nextStep();
   }
 

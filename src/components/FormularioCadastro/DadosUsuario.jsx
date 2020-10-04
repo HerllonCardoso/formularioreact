@@ -38,7 +38,7 @@ function DadosUsuarios({ onSubmit }) {
           setPassword(event.target.value);
         }}
         onBlur={validarCampos}
-        error={erros.senha.valido}
+        error={!erros.senha.valido}
         helperText={erros.senha.texto}
         id="senha"
         name="senha"
