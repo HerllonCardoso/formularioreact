@@ -5,6 +5,7 @@ import "fontsource-roboto";
 
 import { Container, Typography } from "@material-ui/core";
 import { validarCPF, validarSenha } from "./models/cadastro";
+import ValidacoesCadastro from "./contexts/ValidacoesCadastro";
 
 class App extends Component {
   render() {
@@ -13,10 +14,11 @@ class App extends Component {
         <Typography variant="h4" component="h1" align="center">
           Formulário de Cadastro
         </Typography>
-        <FormularioCadastro
-          onSubmit={onSubmit}
-          validacoes={{ cpf: validarCPF, senha: validarSenha }}
-        />
+        <ValidacoesCadastro.Provider
+          value={{ cpf: validarCPF, senha: validarSenha }}
+        >
+          <FormularioCadastro onSubmit={onSubmit} />
+        </ValidacoesCadastro.Provider>
       </Container>
     );
   }

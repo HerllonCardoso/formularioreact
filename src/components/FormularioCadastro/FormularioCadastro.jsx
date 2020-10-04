@@ -13,9 +13,9 @@ function FormularioCadastro({ onSubmit, validacoes }) {
   });
 
   const formularios = [
-    <DadosUsuarios onSubmit={coletarDados} validacoes={validacoes} />,
-    <DadosPessoais onSubmit={coletarDados} validacoes={validacoes} />,
-    <DadosEntrega onSubmit={coletarDados} validacoes={validacoes} />,
+    <DadosUsuarios onSubmit={coletarDados} />,
+    <DadosPessoais onSubmit={coletarDados} />,
+    <DadosEntrega onSubmit={coletarDados} />,
     <Typography variant="h5">Obrigado pelo Cadastro!</Typography>,
   ];
 
